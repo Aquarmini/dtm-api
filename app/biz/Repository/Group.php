@@ -28,7 +28,7 @@ class Group
         $start = $pageIndex * $pageSize;
 
         return GroupModel::find([
-            'conditions' => 'user_id = ?0',
+            'conditions' => 'user_id = ?0 AND is_deleted = 0',
             'bind' => [$userId],
             'offset' => $start,
             'limit' => $pageSize
@@ -44,7 +44,7 @@ class Group
     public function countByUserId($userId)
     {
         return GroupModel::count([
-            'conditions' => 'user_id = ?0',
+            'conditions' => 'user_id = ?0 AND is_deleted = 0',
             'bind' => [$userId],
         ]);
     }

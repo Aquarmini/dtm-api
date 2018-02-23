@@ -30,6 +30,13 @@ class Group extends Model
 
     /**
      *
+     * @var integer
+     * @Column(column="is_deleted", type="integer", length=3, nullable=false)
+     */
+    public $is_deleted;
+
+    /**
+     *
      * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */

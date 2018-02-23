@@ -15,11 +15,13 @@ use App\Utils\Redis;
 use Phalcon\Text;
 use Xin\Traits\Common\InstanceTrait;
 use App\Biz\Repository\User as UserRepository;
+use App\Models\User as UserModel;
 
 class User
 {
     use InstanceTrait;
 
+    /** @var UserModel $user */
     public $user;
 
     public function login($login, $password)

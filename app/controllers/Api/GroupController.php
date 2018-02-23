@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Api;
 
+use App\Biz\Group;
 use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Common\Validators\GroupIndexValidator;
@@ -24,8 +25,12 @@ class GroupController extends Controller
             throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
         }
 
+        $pageIndex = $validator->getValue('pageIndex');
+        $pageSize = $validator->getValue('pageSize');
 
-        return Response::success();
+        $result = Group::getInstance()->listByUserId($pageIndex, $pageSize);
+
+        return Response::success($result);
     }
 
 }

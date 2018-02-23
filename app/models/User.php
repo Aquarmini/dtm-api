@@ -56,6 +56,10 @@ class User extends Model
     {
         $this->setSchema("dtm");
         $this->setSource("user");
+        $this->hasMany('id', Group::class, 'user_id', [
+            'reusable' => true,
+            'alias' => 'groups'
+        ]);
         parent::initialize();
     }
 

@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $validator = new UserLoginValidator();
         if ($validator->validate(Request::get())->valid()) {
-            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR);
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
         }
 
         $login = $validator->getValue('login');
@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $validator = new UserRegisterValidator();
         if ($validator->validate(Request::get())->valid()) {
-            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR);
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
         }
 
         $login = $validator->getValue('login');

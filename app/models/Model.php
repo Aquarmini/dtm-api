@@ -19,8 +19,20 @@ abstract class Model extends BaseModel
     public function initialize()
     {
         // Sets if a model must use dynamic update instead of the all-field update
-        // $this->useDynamicUpdate(true);
+        $this->useDynamicUpdate(true);
     }
+
+    public function beforeCreate()
+    {
+        $this->created_at = date('Y-m-d H:i:s');
+        $this->updated_at = date('Y-m-d H:i:s');
+    }
+
+    public function beforeUpdate()
+    {
+        $this->updated_at = date('Y-m-d H:i:s');
+    }
+
 
     /**
      * @desc   验证失败之后的事件

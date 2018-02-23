@@ -31,4 +31,14 @@ class ErrorCode extends Enum
      * @Message('用户不存在或者密码错误')
      */
     public static $ENUM_USER_PASSWORD_ERROR = 1001;
+
+    /**
+     * @Message('用户登录名已存在，请更换其他登录名')
+     */
+    public static $ENUM_USER_LOGINNAME_EXIST = 1002;
+
+    /**
+     * @Message('用户注册失败！')
+     */
+    public static $ENUM_USER_REGISTER_FAIL = 1003;
 }

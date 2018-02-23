@@ -24,9 +24,16 @@ class User extends Model
     /**
      *
      * @var string
-     * @Column(column="password", type="string", length=32, nullable=false)
+     * @Column(column="password", type="string", length=128, nullable=false)
      */
     public $password;
+
+    /**
+     *
+     * @var string
+     * @Column(column="nickname", type="string", length=32, nullable=false)
+     */
+    public $nickname;
 
     /**
      *

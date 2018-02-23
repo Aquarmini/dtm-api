@@ -20,7 +20,7 @@ class User
 
     public function login($login, $password)
     {
-        $user = UserRepository::getInstance()->getByLogin($login);
+        $user = UserRepository::getInstance()->getByLoginName($login);
         if (empty($user)) {
             // 用户不存在
             throw new BizException(ErrorCode::$ENUM_USER_NOT_EXSIT);
@@ -31,5 +31,15 @@ class User
         }
 
         return $user;
+    }
+
+    public function register($login, $password, $nickname)
+    {
+        $user = UserRepository::getInstance()->getByLoginName($login);
+        if ($user) {
+            throw new BizException(ErrorCode::$ENUM_USER_LOGINNAME_EXIST);
+        }
+
+        return UserRepository::getInstance()->create($login, $password, $nickname);
     }
 }

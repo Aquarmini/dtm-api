@@ -14,7 +14,7 @@ use Tests\UnitTestCase;
 /**
  * Class UnitTest
  */
-class BaseTest extends UnitTestCase
+class FuncTest extends UnitTestCase
 {
     public function testPassword()
     {

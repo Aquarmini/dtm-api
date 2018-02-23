@@ -19,7 +19,7 @@ class Task extends Model
      * @var integer
      * @Column(column="group_id", type="integer", length=20, nullable=false)
      */
-    public $group_id;
+    public $groupId;
 
     /**
      *
@@ -33,14 +33,14 @@ class Task extends Model
      * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */
-    public $created_at;
+    public $createdAt;
 
     /**
      *
      * @var string
      * @Column(column="updated_at", type="string", nullable=true)
      */
-    public $updated_at;
+    public $updatedAt;
 
     /**
      * Initialize method for model.
@@ -82,6 +82,23 @@ class Task extends Model
     public function getSource()
     {
         return 'task';
+    }
+
+    /**
+     * Independent Column Mapping.
+     * Keys are the real names in the table and the values their names in the application
+     *
+     * @return array
+     */
+    public function columnMap()
+    {
+        return [
+            'id' => 'id',
+            'group_id' => 'groupId',
+            'detail' => 'detail',
+            'created_at' => 'createdAt',
+            'updated_at' => 'updatedAt'
+        ];
     }
 
 }

@@ -28,7 +28,7 @@ class Group
         $start = $pageIndex * $pageSize;
 
         return GroupModel::find([
-            'conditions' => 'user_id = ?0 AND is_deleted = 0',
+            'conditions' => 'userId = ?0 AND isDeleted = 0',
             'bind' => [$userId],
             'offset' => $start,
             'limit' => $pageSize
@@ -44,8 +44,23 @@ class Group
     public function countByUserId($userId)
     {
         return GroupModel::count([
-            'conditions' => 'user_id = ?0 AND is_deleted = 0',
+            'conditions' => 'userId = ?0 AND isDeleted = 0',
             'bind' => [$userId],
         ]);
+    }
+
+    /**
+     * @desc   新增任务组
+     * @author limx
+     * @param $userId
+     * @param $name
+     * @return bool
+     */
+    public function add($userId, $name)
+    {
+        $group = new GroupModel();
+        $group->userId = $userId;
+        $group->name = $name;
+        return $group->save();
     }
 }

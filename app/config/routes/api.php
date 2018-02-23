@@ -11,3 +11,7 @@ $router->add('/user/register', 'App\\Controllers\\Api\\User::register');
 $router->add('/user/info', 'App\\Controllers\\Api\\User::info');
 // 我的任务组
 $router->add('/group/index', 'App\\Controllers\\Api\\Group::index');
+// 新增任务组
+$router->add('/group/add', 'App\\Controllers\\Api\\Group::add');
+// 新增任务组
+$router->add('/group/save', 'App\\Controllers\\Api\\Group::save');

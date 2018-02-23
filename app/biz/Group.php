@@ -27,4 +27,20 @@ class Group
             'count' => $count
         ];
     }
+
+    public function add($name)
+    {
+        $user = User::getInstance()->user;
+        $repository = GroupRepository::getInstance();
+
+        return $repository->add($user->id, $name);
+    }
+
+    public function save($name)
+    {
+        $user = User::getInstance()->user;
+        $repository = GroupRepository::getInstance();
+
+        return $repository->add($user->id, $name);
+    }
 }

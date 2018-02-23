@@ -9,6 +9,7 @@
 namespace Tests\Api;
 
 use App\Biz\Common\Password;
+use App\Models\User;
 use Tests\UnitTestCase;
 
 /**
@@ -21,5 +22,11 @@ class FuncTest extends UnitTestCase
         $password = Password::getInstance()->encrypt('910123');
 
         $this->assertTrue(Password::getInstance()->check('910123', $password));
+    }
+
+    public function testModelFindFirst()
+    {
+        $user = User::findFirst(1);
+        $this->assertEquals(1, $user->id);
     }
 }

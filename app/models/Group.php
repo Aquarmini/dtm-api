@@ -19,7 +19,7 @@ class Group extends Model
      * @var integer
      * @Column(column="user_id", type="integer", length=20, nullable=false)
      */
-    public $user_id;
+    public $userId;
 
     /**
      *
@@ -33,21 +33,21 @@ class Group extends Model
      * @var integer
      * @Column(column="is_deleted", type="integer", length=3, nullable=false)
      */
-    public $is_deleted;
+    public $isDeleted;
 
     /**
      *
      * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */
-    public $created_at;
+    public $createdAt;
 
     /**
      *
      * @var string
      * @Column(column="updated_at", type="string", nullable=true)
      */
-    public $updated_at;
+    public $updatedAt;
 
     /**
      * Initialize method for model.
@@ -89,6 +89,24 @@ class Group extends Model
     public function getSource()
     {
         return 'group';
+    }
+
+    /**
+     * Independent Column Mapping.
+     * Keys are the real names in the table and the values their names in the application
+     *
+     * @return array
+     */
+    public function columnMap()
+    {
+        return [
+            'id' => 'id',
+            'user_id' => 'userId',
+            'name' => 'name',
+            'is_deleted' => 'isDeleted',
+            'created_at' => 'createdAt',
+            'updated_at' => 'updatedAt'
+        ];
     }
 
 }

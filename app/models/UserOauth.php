@@ -26,21 +26,21 @@ class UserOauth extends Model
      * @var integer
      * @Column(column="user_id", type="integer", length=20, nullable=true)
      */
-    public $user_id;
+    public $userId;
 
     /**
      *
      * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */
-    public $created_at;
+    public $createdAt;
 
     /**
      *
      * @var string
      * @Column(column="updated_at", type="string", nullable=true)
      */
-    public $updated_at;
+    public $updatedAt;
 
     /**
      * Initialize method for model.
@@ -82,6 +82,23 @@ class UserOauth extends Model
     public function getSource()
     {
         return 'user_oauth';
+    }
+
+    /**
+     * Independent Column Mapping.
+     * Keys are the real names in the table and the values their names in the application
+     *
+     * @return array
+     */
+    public function columnMap()
+    {
+        return [
+            'id' => 'id',
+            'openid' => 'openid',
+            'user_id' => 'userId',
+            'created_at' => 'createdAt',
+            'updated_at' => 'updatedAt'
+        ];
     }
 
 }

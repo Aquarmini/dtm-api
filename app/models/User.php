@@ -40,14 +40,14 @@ class User extends Model
      * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */
-    public $created_at;
+    public $createdAt;
 
     /**
      *
      * @var string
      * @Column(column="updated_at", type="string", nullable=true)
      */
-    public $updated_at;
+    public $updatedAt;
 
     /**
      * Initialize method for model.
@@ -93,6 +93,24 @@ class User extends Model
     public function getSource()
     {
         return 'user';
+    }
+
+    /**
+     * Independent Column Mapping.
+     * Keys are the real names in the table and the values their names in the application
+     *
+     * @return array
+     */
+    public function columnMap()
+    {
+        return [
+            'id' => 'id',
+            'login' => 'login',
+            'password' => 'password',
+            'nickname' => 'nickname',
+            'created_at' => 'createdAt',
+            'updated_at' => 'updatedAt'
+        ];
     }
 
 }

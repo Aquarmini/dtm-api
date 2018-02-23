@@ -46,4 +46,9 @@ class ErrorCode extends Enum
      * @Message('用户注册失败！')
      */
     public static $ENUM_USER_REGISTER_FAIL = 1003;
+
+    /**
+     * @Message('任务组新建失败！')
+     */
+    public static $ENUM_TASK_GROUP_CREATE_FAIL = 1004;
 }

@@ -23,8 +23,16 @@ class GroupTest extends HttpTestCase
             'pageIndex' => 0,
             'pageSize' => 10
         ]);
-        dd($result);
         $this->assertTrue($result['success']);
-        $this->assertEquals('limx', $result['data']['login']);
+        $this->assertArrayHasKey('items', $result['data']);
+        $this->assertArrayHasKey('count', $result['data']);
+    }
+
+    public function testGroupAdd()
+    {
+        $result = $this->post('/group/add', [
+            'name' => '测试组',
+        ]);
+        $this->assertTrue($result['success']);
     }
 }

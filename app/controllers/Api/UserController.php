@@ -40,9 +40,20 @@ class UserController extends Controller
         $password = $validator->getValue('password');
         $nickname = $validator->getValue('nickname');
 
-        $user = User::getInstance()->register($login, $password,$nickname);
+        $user = User::getInstance()->register($login, $password, $nickname);
 
         return Response::success($user);
+    }
+
+    /**
+     * @desc   获取用户信息
+     * @author limx
+     * @Middleware('auth')
+     * @return \Phalcon\Http\Response
+     */
+    public function infoAction()
+    {
+        return Response::success(User::getInstance()->user);
     }
 
 }

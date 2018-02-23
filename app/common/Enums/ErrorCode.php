@@ -23,6 +23,11 @@ class ErrorCode extends Enum
     public static $ENUM_PARAMS_ERROR = 401;
 
     /**
+     * @Message('TOKEN已失效')
+     */
+    public static $ENUM_TOKEN_INVALIAD = 700;
+
+    /**
      * @Message('用户不存在或者密码错误')
      */
     public static $ENUM_USER_NOT_EXSIT = 1000;

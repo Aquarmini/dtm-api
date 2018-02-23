@@ -33,6 +33,17 @@ class User
     }
 
     /**
+     * @desc   根据用户ID获取用户
+     * @author limx
+     * @param $id
+     * @return UserModel|\Phalcon\Mvc\Model\ResultInterface
+     */
+    public function getById($id)
+    {
+        return UserModel::findFirst($id);
+    }
+
+    /**
      * @desc   新建用户
      * @author limx
      * @param $login

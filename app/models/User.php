@@ -53,16 +53,6 @@ class User extends Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'user';
-    }
-
-    /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
@@ -82,6 +72,16 @@ class User extends Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'user';
     }
 
 }

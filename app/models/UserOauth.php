@@ -24,7 +24,7 @@ class UserOauth extends Model
     /**
      *
      * @var integer
-     * @Column(column="user_id", type="integer", length=20, nullable=false)
+     * @Column(column="user_id", type="integer", length=20, nullable=true)
      */
     public $user_id;
 
@@ -53,16 +53,6 @@ class UserOauth extends Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'user_oauth';
-    }
-
-    /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
@@ -82,6 +72,16 @@ class UserOauth extends Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'user_oauth';
     }
 
 }

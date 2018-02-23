@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.21)
 # Database: dtm
-# Generation Time: 2018-02-23 10:53:18 +0000
+# Generation Time: 2018-02-23 13:38:41 +0000
 # ************************************************************
 
 
@@ -29,6 +29,7 @@ CREATE TABLE `group` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL COMMENT '用户ID',
   `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '组名',
+  `is_deleted` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),

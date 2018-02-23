@@ -51,4 +51,9 @@ class ErrorCode extends Enum
      * @Message('任务组新建失败！')
      */
     public static $ENUM_TASK_GROUP_CREATE_FAIL = 1004;
+
+    /**
+     * @Message('您没有修改此任务组的权限！')
+     */
+    public static $ENUM_GROUP_YOU_CAN_NOT_CHANGED = 1005;
 }

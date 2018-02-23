@@ -9,6 +9,7 @@
 namespace Tests\Api;
 
 use App\Biz\Common\Password;
+use App\Models\Group;
 use Tests\HttpTestCase;
 use Tests\UnitTestCase;
 
@@ -34,5 +35,21 @@ class GroupTest extends HttpTestCase
             'name' => '测试组',
         ]);
         $this->assertTrue($result['success']);
+    }
+
+    public function testGroupSave()
+    {
+        $name = '测试组' . uniqid();
+        $group = Group::findFirst();
+
+        $result = $this->post('/group/save', [
+            'name' => $name,
+            'groupId' => $group->id
+        ]);
+
+        $this->assertTrue($result['success']);
+
+        $group = Group::findFirst();
+        $this->assertEquals($name, $group->name);
     }
 }

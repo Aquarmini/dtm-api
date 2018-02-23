@@ -63,4 +63,15 @@ class Group
         $group->name = $name;
         return $group->save();
     }
+
+    /**
+     * @desc   通过组ID获取组信息
+     * @author limx
+     * @param $id
+     * @return GroupModel|\Phalcon\Mvc\Model\ResultInterface
+     */
+    public function getById($id)
+    {
+        return GroupModel::findFirst($id);
+    }
 }

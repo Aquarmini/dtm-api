@@ -8,6 +8,8 @@
 // +----------------------------------------------------------------------
 namespace App\Biz;
 
+use App\Common\Enums\ErrorCode;
+use App\Common\Exceptions\BizException;
 use Xin\Traits\Common\InstanceTrait;
 use App\Biz\Repository\Group as GroupRepository;
 
@@ -36,11 +38,18 @@ class Group
         return $repository->add($user->id, $name);
     }
 
-    public function save($name)
+    public function save($id, $name)
     {
         $user = User::getInstance()->user;
         $repository = GroupRepository::getInstance();
 
-        return $repository->add($user->id, $name);
+        $group = $repository->getById($id);
+        if ($group->userId !== $user->id) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_YOU_CAN_NOT_CHANGED);
+        }
+
+        $group->name = $name;
+
+        return $group->save();
     }
 }

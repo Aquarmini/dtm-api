@@ -7,6 +7,7 @@ use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Common\Validators\GroupAddValidator;
 use App\Common\Validators\GroupIndexValidator;
+use App\Common\Validators\GroupSaveValidator;
 use App\Controllers\Controller;
 use App\Utils\Request;
 use App\Utils\Response;
@@ -64,14 +65,15 @@ class GroupController extends Controller
      */
     public function saveAction()
     {
-        $validator = new GroupAddValidator();
+        $validator = new GroupSaveValidator();
         if ($validator->validate(Request::get())->valid()) {
             throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
         }
 
         $name = $validator->getValue('name');
+        $groupId = $validator->getValue('groupId');
 
-        $result = Group::getInstance()->add($name);
+        $result = Group::getInstance()->save($groupId, $name);
         if ($result) {
             return Response::success();
         }

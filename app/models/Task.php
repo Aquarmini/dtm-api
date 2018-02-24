@@ -31,6 +31,20 @@ class Task extends Model
     /**
      *
      * @var string
+     * @Column(column="begin_at", type="string", nullable=true)
+     */
+    public $beginAt;
+
+    /**
+     *
+     * @var string
+     * @Column(column="end_at", type="string", nullable=true)
+     */
+    public $endAt;
+
+    /**
+     *
+     * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */
     public $createdAt;
@@ -41,6 +55,13 @@ class Task extends Model
      * @Column(column="updated_at", type="string", nullable=true)
      */
     public $updatedAt;
+
+    /**
+     *
+     * @var integer
+     * @Column(column="status", type="integer", length=4, nullable=false)
+     */
+    public $status;
 
     /**
      * Initialize method for model.
@@ -96,8 +117,11 @@ class Task extends Model
             'id' => 'id',
             'group_id' => 'groupId',
             'detail' => 'detail',
+            'begin_at' => 'beginAt',
+            'end_at' => 'endAt',
             'created_at' => 'createdAt',
-            'updated_at' => 'updatedAt'
+            'updated_at' => 'updatedAt',
+            'status' => 'status'
         ];
     }
 

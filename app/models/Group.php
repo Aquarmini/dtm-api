@@ -93,16 +93,6 @@ class Group extends Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'group';
-    }
-
-    /**
      * Independent Column Mapping.
      * Keys are the real names in the table and the values their names in the application
      *
@@ -118,6 +108,16 @@ class Group extends Model
             'created_at' => 'createdAt',
             'updated_at' => 'updatedAt'
         ];
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'group';
     }
 
 }

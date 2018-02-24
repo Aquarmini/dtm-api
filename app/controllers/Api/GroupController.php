@@ -6,6 +6,7 @@ use App\Biz\Group;
 use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Common\Validators\GroupAddValidator;
+use App\Common\Validators\GroupDeleteValidator;
 use App\Common\Validators\GroupIndexValidator;
 use App\Common\Validators\GroupSaveValidator;
 use App\Controllers\Controller;
@@ -50,9 +51,11 @@ class GroupController extends Controller
 
         $name = $validator->getValue('name');
 
-        $result = Group::getInstance()->add($name);
-        if ($result) {
-            return Response::success();
+        $id = Group::getInstance()->add($name);
+        if ($id > 0) {
+            return Response::success([
+                'id' => $id
+            ]);
         }
         return Response::fail(ErrorCode::$ENUM_TASK_GROUP_CREATE_FAIL);
     }
@@ -77,7 +80,29 @@ class GroupController extends Controller
         if ($result) {
             return Response::success();
         }
-        return Response::fail(ErrorCode::$ENUM_TASK_GROUP_CREATE_FAIL);
+        return Response::fail(ErrorCode::$ENUM_TASK_GROUP_SAVE_FAIL);
+    }
+
+    /**
+     * @desc   删除任务组
+     * @author limx
+     * @Middleware('auth')
+     * @return \Phalcon\Http\Response
+     */
+    public function deleteAction()
+    {
+        $validator = new GroupDeleteValidator();
+        if ($validator->validate(Request::get())->valid()) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $groupId = $validator->getValue('groupId');
+        $result = Group::getInstance()->delete($groupId);
+
+        if ($result) {
+            return Response::success();
+        }
+        return Response::fail(ErrorCode::$ENUM_TASK_GROUP_DELETE_FAIL);
     }
 
 }

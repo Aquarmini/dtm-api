@@ -54,14 +54,17 @@ class Group
      * @author limx
      * @param $userId
      * @param $name
-     * @return bool
+     * @return bool|integer
      */
     public function add($userId, $name)
     {
         $group = new GroupModel();
         $group->userId = $userId;
         $group->name = $name;
-        return $group->save();
+        if ($group->save()) {
+            return $group->id;
+        }
+        return false;
     }
 
     /**

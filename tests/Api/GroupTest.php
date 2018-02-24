@@ -10,6 +10,7 @@ namespace Tests\Api;
 
 use App\Biz\Common\Password;
 use App\Models\Group;
+use Phalcon\Mvc\Model\MetaData\Files;
 use Tests\HttpTestCase;
 use Tests\UnitTestCase;
 
@@ -51,5 +52,21 @@ class GroupTest extends HttpTestCase
 
         $group = Group::findFirst();
         $this->assertEquals($name, $group->name);
+    }
+
+    public function testGroupDelete()
+    {
+        $result = $this->post('/group/add', [
+            'name' => '测试组',
+        ]);
+        $this->assertTrue($result['success']);
+
+        $id = $result['data']['id'];
+
+        $result = $this->post('/group/delete', [
+            'groupId' => $id
+        ]);
+
+        dd($result);
     }
 }

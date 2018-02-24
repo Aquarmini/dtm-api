@@ -15,3 +15,5 @@ $router->add('/group/index', 'App\\Controllers\\Api\\Group::index');
 $router->add('/group/add', 'App\\Controllers\\Api\\Group::add');
 // 新增任务组
 $router->add('/group/save', 'App\\Controllers\\Api\\Group::save');
+// 删除任务组
+$router->add('/group/delete', 'App\\Controllers\\Api\\Group::delete');

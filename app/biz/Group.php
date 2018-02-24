@@ -10,6 +10,7 @@ namespace App\Biz;
 
 use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
+use Phalcon\Mvc\Model\MetaDataInterface;
 use Xin\Traits\Common\InstanceTrait;
 use App\Biz\Repository\Group as GroupRepository;
 
@@ -51,5 +52,18 @@ class Group
         $group->name = $name;
 
         return $group->save();
+    }
+
+    public function delete($id)
+    {
+        $user = User::getInstance()->user;
+        $repository = GroupRepository::getInstance();
+
+        $group = $repository->getById($id);
+        if ($group->userId !== $user->id) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_YOU_CAN_NOT_DELETED);
+        }
+
+        return $group->delete();
     }
 }

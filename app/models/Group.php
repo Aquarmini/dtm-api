@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Phalcon\Mvc\Model\Behavior\SoftDelete;
+
 class Group extends Model
 {
 
@@ -56,6 +58,15 @@ class Group extends Model
     {
         $this->setSchema("dtm");
         $this->setSource("group");
+        $this->addBehavior(
+            new SoftDelete(
+                [
+                    'field' => 'isDeleted',
+                    'value' => parent::DELETED,
+                ]
+            )
+        );
+
         parent::initialize();
     }
 

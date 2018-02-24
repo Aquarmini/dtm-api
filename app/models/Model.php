@@ -13,6 +13,9 @@ use App\Core\Mvc\Model as BaseModel;
 
 abstract class Model extends BaseModel
 {
+    const DELETED = 1;
+    const NOT_DELETED = 0;
+
     /**
      * Initialize method for model.
      */

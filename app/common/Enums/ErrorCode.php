@@ -56,4 +56,19 @@ class ErrorCode extends Enum
      * @Message('您没有修改此任务组的权限！')
      */
     public static $ENUM_GROUP_YOU_CAN_NOT_CHANGED = 1005;
+
+    /**
+     * @Message('任务组保存失败！')
+     */
+    public static $ENUM_TASK_GROUP_SAVE_FAIL = 1006;
+
+    /**
+     * @Message('您没有删除此任务组的权限！')
+     */
+    public static $ENUM_GROUP_YOU_CAN_NOT_DELETED = 1007;
+
+    /**
+     * @Message('任务组删除失败！')
+     */
+    public static $ENUM_TASK_GROUP_DELETE_FAIL = 1008;
 }

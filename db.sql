@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.21)
 # Database: dtm
-# Generation Time: 2018-02-23 13:38:41 +0000
+# Generation Time: 2018-02-24 08:01:34 +0000
 # ************************************************************
 
 
@@ -47,6 +47,9 @@ CREATE TABLE `task` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `group_id` bigint(20) unsigned NOT NULL COMMENT '组ID',
   `detail` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '任务详情',
+  `begin_at` datetime DEFAULT NULL COMMENT '任务开始时间',
+  `end_at` datetime DEFAULT NULL COMMENT '任务结束时间',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '任务状态 0未开始1进行中2延期...10已完成',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),

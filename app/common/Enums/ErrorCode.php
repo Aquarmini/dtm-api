@@ -71,4 +71,15 @@ class ErrorCode extends Enum
      * @Message('任务组删除失败！')
      */
     public static $ENUM_TASK_GROUP_DELETE_FAIL = 1008;
+
+    /**
+     * @Message('任务组不存在！')
+     */
+    public static $ENUM_GROUP_NOT_EXSIT = 1009;
+
+    /**
+     * @Message('新建任务失败！')
+     */
+    public static $ENUM_TASK_CREATE_FAIL = 1010;
+
 }

@@ -67,6 +67,6 @@ class GroupTest extends HttpTestCase
             'groupId' => $id
         ]);
 
-        dd($result);
+        $this->assertTrue($result['success']);
     }
 }

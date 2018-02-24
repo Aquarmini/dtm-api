@@ -11,7 +11,7 @@ namespace App\Common\Validators;
 use App\Core\Validation\Validator;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class GroupIndexValidator extends Validator
+class TaskIndexValidator extends Validator
 {
     public function initialize()
     {
@@ -19,6 +19,7 @@ class GroupIndexValidator extends Validator
             [
                 'pageIndex',
                 'pageSize',
+                'groupId'
             ],
             new PresenceOf([
                 'message' => 'The :field is required!'

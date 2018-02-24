@@ -82,4 +82,9 @@ class ErrorCode extends Enum
      */
     public static $ENUM_TASK_CREATE_FAIL = 1010;
 
+    /**
+     * @Message('越权操作！')
+     */
+    public static $ENUM_GROUP_NOT_HAVE_AUTHORITY = 1011;
+
 }

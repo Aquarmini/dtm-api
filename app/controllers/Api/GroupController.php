@@ -7,7 +7,7 @@ use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Common\Validators\GroupAddValidator;
 use App\Common\Validators\GroupDeleteValidator;
-use App\Common\Validators\GroupIndexValidator;
+use App\Common\Validators\PaginationValidator;
 use App\Common\Validators\GroupSaveValidator;
 use App\Controllers\Controller;
 use App\Utils\Request;
@@ -23,7 +23,7 @@ class GroupController extends Controller
      */
     public function indexAction()
     {
-        $validator = new GroupIndexValidator();
+        $validator = new PaginationValidator();
         if ($validator->validate(Request::get())->valid()) {
             throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
         }

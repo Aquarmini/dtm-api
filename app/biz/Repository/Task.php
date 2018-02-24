@@ -32,4 +32,36 @@ class Task
         }
         return false;
     }
+
+    /**
+     * @desc   返回任务列表
+     * @author limx
+     * @param     $groupId
+     * @param int $pageIndex
+     * @param int $pageSize
+     * @return TaskModel|TaskModel[]|\Phalcon\Mvc\Model\ResultSetInterface
+     */
+    public function index($groupId, $pageIndex = 0, $pageSize = 10)
+    {
+        return TaskModel::find([
+            'conditions' => 'groupId = ?0',
+            'bind' => [$groupId],
+            'offset' => $pageSize * $pageIndex,
+            'limit' => $pageSize
+        ]);
+    }
+
+    /**
+     * @desc   返回任务总数
+     * @author limx
+     * @param $groupId
+     * @return mixed
+     */
+    public function count($groupId)
+    {
+        return TaskModel::count([
+            'conditions' => 'groupId = ?0',
+            'bind' => [$groupId],
+        ]);
+    }
 }

@@ -40,4 +40,30 @@ class TaskTest extends HttpTestCase
             }
         }
     }
+
+    public function testTaskIndex()
+    {
+        $result = $this->post('/group/index', [
+            'pageIndex' => 0,
+            'pageSize' => 10
+        ]);
+
+        $this->assertTrue($result['success']);
+        if ($items = $result['data']['items']) {
+            if (!empty($items)) {
+                $group = $items[0];
+                $id = $group['id'];
+
+                $result = $this->post('/task/index', [
+                    'groupId' => $id,
+                    'pageIndex' => 0,
+                    'pageSize' => 10
+                ]);
+
+                dd($result);
+
+                $this->assertTrue($result['success']);
+            }
+        }
+    }
 }

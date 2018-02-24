@@ -37,4 +37,27 @@ class Task
 
         return ['info' => $result];
     }
+
+    public function index($groupId, $pageIndex = 0, $pageSize = 10)
+    {
+        $user = User::getInstance()->user;
+
+        $group = GroupRepository::getInstance()->getById($groupId);
+        if (empty($group)) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_EXSIT);
+        }
+
+        if ($group->userId !== $user->id) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_HAVE_AUTHORITY);
+        }
+
+        $repository = TaskRepository::getInstance();
+        $tasks = $repository->index($groupId, $pageIndex, $pageSize);
+        $count = $repository->count($groupId);
+
+        return [
+            'itmes' => $tasks,
+            'total' => $count
+        ];
+    }
 }

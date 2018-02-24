@@ -19,3 +19,7 @@ $router->add('/group/save', 'App\\Controllers\\Api\\Group::save');
 $router->add('/group/delete', 'App\\Controllers\\Api\\Group::delete');
 // 新增某个任务
 $router->add('/task/add', 'App\\Controllers\\Api\\Task::add');
+// 任务列表
+$router->add('/task/index', 'App\\Controllers\\Api\\Task::index');
+// 修改任务状态
+$router->add('/task/status', 'App\\Controllers\\Api\\Task::status');

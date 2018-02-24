@@ -46,6 +46,13 @@ class Task extends Model
 
     /**
      *
+     * @var integer
+     * @Column(column="status", type="integer", length=4, nullable=false)
+     */
+    public $status;
+
+    /**
+     *
      * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */
@@ -57,13 +64,6 @@ class Task extends Model
      * @Column(column="updated_at", type="string", nullable=true)
      */
     public $updatedAt;
-
-    /**
-     *
-     * @var integer
-     * @Column(column="status", type="integer", length=4, nullable=false)
-     */
-    public $status;
 
     /**
      * Initialize method for model.
@@ -78,6 +78,7 @@ class Task extends Model
         ]);
         parent::initialize();
     }
+
 
     public function beforeCreate()
     {
@@ -109,16 +110,6 @@ class Task extends Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'task';
-    }
-
-    /**
      * Independent Column Mapping.
      * Keys are the real names in the table and the values their names in the application
      *
@@ -136,6 +127,16 @@ class Task extends Model
             'updated_at' => 'updatedAt',
             'status' => 'status'
         ];
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'task';
     }
 
 }

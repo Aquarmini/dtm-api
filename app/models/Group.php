@@ -66,6 +66,10 @@ class Group extends Model
                 ]
             )
         );
+        $this->belongsTo('userId', User::class, 'id', [
+            'reusable' => true,
+            'alias' => 'user',
+        ]);
 
         parent::initialize();
     }

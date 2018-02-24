@@ -16,6 +16,17 @@ class Task
     use InstanceTrait;
 
     /**
+     * @desc   根据ID获取任务
+     * @author limx
+     * @param $taskId
+     * @return TaskModel|\Phalcon\Mvc\Model\ResultInterface
+     */
+    public function getById($taskId)
+    {
+        return TaskModel::findFirst($taskId);
+    }
+
+    /**
      * @desc   新增任务
      * @author limx
      * @param $groupId

@@ -72,6 +72,10 @@ class Task extends Model
     {
         $this->setSchema("dtm");
         $this->setSource("task");
+        $this->belongsTo('groupId', Group::class, 'id', [
+            'reusable' => true,
+            'alias' => 'group',
+        ]);
         parent::initialize();
     }
 

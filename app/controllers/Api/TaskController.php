@@ -8,6 +8,7 @@ use App\Common\Exceptions\BizException;
 use App\Common\Validators\PaginationValidator;
 use App\Common\Validators\TaskAddValidator;
 use App\Common\Validators\TaskIndexValidator;
+use App\Common\Validators\TaskStatusValidator;
 use App\Controllers\Controller;
 use App\Utils\Request;
 use App\Utils\Response;
@@ -57,5 +58,26 @@ class TaskController extends Controller
         return Response::success($result);
     }
 
+    /**
+     * @desc   更改任务状态
+     * @author limx
+     * @Middleware('auth')
+     * @return \Phalcon\Http\Response
+     */
+    public function statusAction()
+    {
+        $validator = new TaskStatusValidator();
+        if ($validator->validate(Request::get())->valid()) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $taskId = $validator->getValue('taskId');
+        $status = $validator->getValue('status');
+
+        if (Task::getInstance()->status($taskId, $status)) {
+            return Response::success();
+        }
+        return Response::fail(ErrorCode::$ENUM_TASK_STATUS_CHANGED_FAIL);
+    }
 }
 

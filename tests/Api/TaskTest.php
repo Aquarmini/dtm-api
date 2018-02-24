@@ -9,6 +9,7 @@
 namespace Tests\Api;
 
 use App\Biz\Common\Password;
+use App\Common\Enums\SystemCode;
 use App\Models\User;
 use Tests\HttpTestCase;
 use Tests\UnitTestCase;
@@ -41,7 +42,7 @@ class TaskTest extends HttpTestCase
         }
     }
 
-    public function testTaskIndex()
+    public function testTaskIndexAndStatus()
     {
         $result = $this->post('/group/index', [
             'pageIndex' => 0,
@@ -60,9 +61,26 @@ class TaskTest extends HttpTestCase
                     'pageSize' => 10
                 ]);
 
-                dd($result);
-
                 $this->assertTrue($result['success']);
+
+                if ($items = $result['data']['items']) {
+                    if (!empty($items)) {
+                        $task = $items[0];
+                        $result = $this->post('/task/status', [
+                            'taskId' => $task['id'],
+                            'status' => SystemCode::TASK_STATUS_WORKING
+                        ]);
+
+                        $this->assertTrue($result['success']);
+
+                        $result = $this->post('/task/status', [
+                            'taskId' => $task['id'],
+                            'status' => SystemCode::TASK_STATUS_FINISH
+                        ]);
+
+                        $this->assertTrue($result['success']);
+                    }
+                }
             }
         }
     }

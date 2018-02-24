@@ -87,4 +87,23 @@ class ErrorCode extends Enum
      */
     public static $ENUM_GROUP_NOT_HAVE_AUTHORITY = 1011;
 
+    /**
+     * @Message('任务不存在！')
+     */
+    public static $ENUM_TASK_NOT_EXIST = 1012;
+
+    /**
+     * @Message('任务组的所有人不存在！')
+     */
+    public static $ENUM_GROUP_NOT_HAVE_USER = 1013;
+
+    /**
+     * @Message('越权操作！')
+     */
+    public static $ENUM_TASK_NOT_HAVE_AUTHORITY = 1014;
+
+    /**
+     * @Message('任务状态更改失败！')
+     */
+    public static $ENUM_TASK_STATUS_CHANGED_FAIL = 1015;
 }

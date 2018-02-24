@@ -9,6 +9,7 @@
 namespace App\Biz;
 
 use App\Common\Enums\ErrorCode;
+use App\Common\Enums\SystemCode;
 use App\Common\Exceptions\BizException;
 use Xin\Traits\Common\InstanceTrait;
 use App\Biz\Repository\Group as GroupRepository;
@@ -56,8 +57,38 @@ class Task
         $count = $repository->count($groupId);
 
         return [
-            'itmes' => $tasks,
+            'items' => $tasks,
             'total' => $count
         ];
+    }
+
+    public function status($taskId, $status)
+    {
+        $task = TaskRepository::getInstance()->getById($taskId);
+        if (empty($task)) {
+            throw new BizException(ErrorCode::$ENUM_TASK_NOT_EXIST);
+        }
+
+        $group = $task->group;
+        if (empty($group)) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_EXSIT);
+        }
+
+        $user = $group->user;
+        if (empty($user)) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_HAVE_USER);
+        }
+
+        if (User::getInstance()->user->id !== $user->id) {
+            throw new BizException(ErrorCode::$ENUM_TASK_NOT_HAVE_AUTHORITY);
+        }
+
+        if ($status === SystemCode::TASK_STATUS_WORKING) {
+            $task->beginAt = date('Y-m-d H:i:s');
+        } elseif ($status === SystemCode::TASK_STATUS_FINISH) {
+            $task->endAt = date('Y-m-d H:i:s');
+        }
+        $task->status = $status;
+        return $task->save();
     }
 }

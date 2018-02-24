@@ -30,6 +30,7 @@ class Group
         return GroupModel::find([
             'conditions' => 'userId = ?0 AND isDeleted = 0',
             'bind' => [$userId],
+            'order' => 'id DESC',
             'offset' => $start,
             'limit' => $pageSize
         ]);

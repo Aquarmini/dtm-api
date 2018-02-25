@@ -31,6 +31,25 @@ class Group
         ];
     }
 
+    public function info($groupId)
+    {
+        $user = User::getInstance()->user;
+        $group = GroupRepository::getInstance()->getById($groupId);
+        if (empty($group)) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_EXSIT);
+        }
+
+        if (empty($group->user)) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_HAVE_USER);
+        }
+
+        if ($group->user->id !== $user->id) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_HAVE_AUTHORITY);
+        }
+
+        return $group;
+    }
+
     public function add($name)
     {
         $user = User::getInstance()->user;

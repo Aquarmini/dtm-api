@@ -6,7 +6,7 @@ use App\Biz\Group;
 use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Common\Validators\GroupAddValidator;
-use App\Common\Validators\GroupDeleteValidator;
+use App\Common\Validators\GroupIdValidator;
 use App\Common\Validators\PaginationValidator;
 use App\Common\Validators\GroupSaveValidator;
 use App\Controllers\Controller;
@@ -32,6 +32,26 @@ class GroupController extends Controller
         $pageSize = $validator->getValue('pageSize');
 
         $result = Group::getInstance()->listByUserId($pageIndex, $pageSize);
+
+        return Response::success($result);
+    }
+
+    /**
+     * @desc   我的任务组详情
+     * @author limx
+     * @Middleware('auth')
+     * @return \Phalcon\Http\Response
+     */
+    public function infoAction()
+    {
+        $validator = new GroupIdValidator();
+        if ($validator->validate(Request::get())->valid()) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $groupId = $validator->getValue('groupId');
+
+        $result = Group::getInstance()->info($groupId);
 
         return Response::success($result);
     }
@@ -91,7 +111,7 @@ class GroupController extends Controller
      */
     public function deleteAction()
     {
-        $validator = new GroupDeleteValidator();
+        $validator = new GroupIdValidator();
         if ($validator->validate(Request::get())->valid()) {
             throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
         }

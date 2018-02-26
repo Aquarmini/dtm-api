@@ -56,4 +56,13 @@ class UserTest extends HttpTestCase
         $this->assertTrue($result['success']);
         $this->assertEquals('limx', $result['data']['login']);
     }
+
+    public function testWechatLogin()
+    {
+        $result = $this->post('/user/login/wechat', [
+            'code' => '081Fd1n60fyKVJ1OH4m604Pkn60Fd1nU'
+        ]);
+
+        $this->assertEquals(1017, $result['errorCode']);
+    }
 }

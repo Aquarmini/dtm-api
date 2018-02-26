@@ -49,6 +49,10 @@ class UserOauth extends Model
     {
         $this->setSchema("dtm");
         $this->setSource("user_oauth");
+        $this->hasOne('userId', User::class, 'id', [
+            'reusable' => true,
+            'alias' => 'user',
+        ]);
         parent::initialize();
     }
 

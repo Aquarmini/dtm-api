@@ -5,6 +5,7 @@ namespace App\Controllers\Api;
 use App\Biz\User;
 use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
+use App\Common\Validators\CodeValidator;
 use App\Common\Validators\UserLoginValidator;
 use App\Common\Validators\UserRegisterValidator;
 use App\Controllers\Controller;
@@ -54,6 +55,25 @@ class UserController extends Controller
     public function infoAction()
     {
         return Response::success(User::getInstance()->user);
+    }
+
+    /**
+     * @desc   根据微信Code登录
+     * @author limx
+     * @return \Phalcon\Http\Response
+     */
+    public function wechatLoginAction()
+    {
+        $validator = new CodeValidator();
+        if ($validator->validate(Request::get())->valid()) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $code = $validator->getValue('code');
+
+        $result = User::getInstance()->wechatLogin($code);
+
+        return Response::success($result);
     }
 
 }

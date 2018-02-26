@@ -9,12 +9,15 @@
 namespace App\Biz;
 
 use App\Biz\Common\Password;
+use App\Biz\Common\UserToken;
+use App\Biz\Common\Wechat;
 use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Utils\Redis;
 use Phalcon\Text;
 use Xin\Traits\Common\InstanceTrait;
 use App\Biz\Repository\User as UserRepository;
+use App\Biz\Repository\UserOauth as UserOauthRepository;
 use App\Models\User as UserModel;
 
 class User
@@ -36,9 +39,7 @@ class User
             throw new BizException(ErrorCode::$ENUM_USER_PASSWORD_ERROR);
         }
 
-        $token = 'user:token:' . $user->id . ':' . Text::random(Text::RANDOM_ALNUM, 32);
-
-        Redis::set($token, json_encode($user->toArray()), 3600 * 24);
+        $token = UserToken::getInstance()->login($user->toArray());
 
         $result = [
             'token' => $token,
@@ -78,5 +79,30 @@ class User
 
         $this->user = UserRepository::getInstance()->getById($user['id']);
         return true;
+    }
+
+    public function wechatLogin($code)
+    {
+        $app = Wechat::getInstance()->getMiniApplication();
+        $session = $app->auth->session($code);
+
+        if (empty($session['openid'])) {
+            throw new BizException(ErrorCode::$ENUM_OAUTH_LOGIN_FAIL);
+        }
+
+        $openid = $session['openid'];
+        $oauth = UserOauthRepository::getInstance()->findByOpenId($openid);
+        if (empty($oauth) || empty($oauth->user)) {
+            throw new BizException(ErrorCode::$ENUM_OAUTH_NOT_EXIST);
+        }
+
+        $user = $oauth->user->toArray();
+
+        $token = UserToken::getInstance()->login($user);
+
+        return [
+            'token' => $token,
+            'info' => $user
+        ];
     }
 }

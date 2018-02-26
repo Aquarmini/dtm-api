@@ -106,4 +106,14 @@ class ErrorCode extends Enum
      * @Message('任务状态更改失败！')
      */
     public static $ENUM_TASK_STATUS_CHANGED_FAIL = 1015;
+
+    /**
+     * @Message('用户授权信息不存在！')
+     */
+    public static $ENUM_OAUTH_NOT_EXIST = 1016;
+
+    /**
+     * @Message('用户授权登录失败！')
+     */
+    public static $ENUM_OAUTH_LOGIN_FAIL = 1017;
 }

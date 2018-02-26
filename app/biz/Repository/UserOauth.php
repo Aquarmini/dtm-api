@@ -1,0 +1,30 @@
+<?php
+// +----------------------------------------------------------------------
+// | UserOauth.php [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
+// +----------------------------------------------------------------------
+namespace App\Biz\Repository;
+
+use Xin\Traits\Common\InstanceTrait;
+use App\Models\UserOauth as UserOauthModel;
+
+class UserOauth
+{
+    use InstanceTrait;
+
+    /**
+     * @desc   根据OpenId获取Oauth信息
+     * @author limx
+     * @param $openId
+     * @return UserOauthModel|\Phalcon\Mvc\Model\ResultInterface
+     */
+    public function findByOpenId($openId)
+    {
+        return UserOauthModel::findFirst([
+            'openid' => $openId,
+        ]);
+    }
+}

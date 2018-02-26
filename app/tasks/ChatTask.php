@@ -38,7 +38,8 @@ class ChatTask extends WebSocket
     {
         $fd = $frame->fd;
         $data = $frame->data;
-        echo $fd . ':' . $data . PHP_EOL;
+        dump($fd, $data);
+        // echo $fd . ':' . $data . PHP_EOL;
         $server->push($fd, 'ss' . $data);
     }
 

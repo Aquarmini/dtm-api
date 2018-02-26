@@ -14,7 +14,7 @@ class ChatTask extends WebSocket
 
     public function onConstruct()
     {
-        $this->port = 12000;
+        $this->port = 12100;
         $this->host = '127.0.0.1';
     }
 

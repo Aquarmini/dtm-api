@@ -27,4 +27,24 @@ class UserOauth
             'openid' => $openId,
         ]);
     }
+
+    /**
+     * @desc   绑定授权信息
+     * @author limx
+     * @param $userId
+     * @param $openId
+     * @return bool
+     */
+    public function bind($userId, $openId)
+    {
+        $oauth = UserOauthModel::findFirst([
+            'openid' => $openId,
+        ]);
+        if (empty($oauth)) {
+            $oauth = new UserOauthModel();
+            $oauth->openid = $openId;
+        }
+        $oauth->userId = $userId;
+        return $oauth->save();
+    }
 }

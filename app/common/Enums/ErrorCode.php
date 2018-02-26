@@ -116,4 +116,9 @@ class ErrorCode extends Enum
      * @Message('用户授权登录失败！')
      */
     public static $ENUM_OAUTH_LOGIN_FAIL = 1017;
+
+    /**
+     * @Message('微信授权信息绑定出错！')
+     */
+    public static $ENUM_OAUTH_BIND_FAIL = 1018;
 }

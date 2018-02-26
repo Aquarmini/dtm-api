@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Biz\Common;
 
+use App\Models\User;
 use App\Utils\Redis;
 use Phalcon\Text;
 use Xin\Traits\Common\InstanceTrait;
@@ -16,11 +17,11 @@ class UserToken
 {
     use InstanceTrait;
 
-    public function login(array $user)
+    public function login(User $user)
     {
         $token = 'user:token:' . $user->id . ':' . Text::random(Text::RANDOM_ALNUM, 32);
 
-        Redis::set($token, json_encode($user), 3600 * 24);
+        Redis::set($token, json_encode($user->toArray()), 3600 * 24);
 
         return $token;
     }

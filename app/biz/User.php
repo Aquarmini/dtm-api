@@ -39,7 +39,7 @@ class User
             throw new BizException(ErrorCode::$ENUM_USER_PASSWORD_ERROR);
         }
 
-        $token = UserToken::getInstance()->login($user->toArray());
+        $token = UserToken::getInstance()->login($user);
 
         $result = [
             'token' => $token,
@@ -96,13 +96,28 @@ class User
             throw new BizException(ErrorCode::$ENUM_OAUTH_NOT_EXIST);
         }
 
-        $user = $oauth->user->toArray();
+        $user = $oauth->user;
 
         $token = UserToken::getInstance()->login($user);
 
         return [
             'token' => $token,
-            'info' => $user
+            'info' => $user->toArray()
         ];
+    }
+
+    public function bindWechat($code)
+    {
+        $app = Wechat::getInstance()->getMiniApplication();
+        $session = $app->auth->session($code);
+
+        if (empty($session['openid'])) {
+            throw new BizException(ErrorCode::$ENUM_OAUTH_LOGIN_FAIL);
+        }
+
+        $openid = $session['openid'];
+        $user = User::getInstance()->user;
+
+        return UserOauthRepository::getInstance()->bind($user->id, $openid);
     }
 }

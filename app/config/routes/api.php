@@ -10,6 +10,8 @@ $router->add('/user/login/wechat', 'App\\Controllers\\Api\\User::wechatLogin');
 
 // 用户信息
 $router->add('/user/info', 'App\\Controllers\\Api\\User::info');
+// 绑定微信授权
+$router->add('/user/bind/wechat', 'App\\Controllers\\Api\\User::bindWechat');
 // 我的任务组
 $router->add('/group/index', 'App\\Controllers\\Api\\Group::index');
 // 我的任务组详情

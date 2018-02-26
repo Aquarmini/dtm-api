@@ -76,5 +76,28 @@ class UserController extends Controller
         return Response::success($result);
     }
 
+    /**
+     * @desc   绑定微信openid
+     * @author limx
+     * @Middleware('auth')
+     * @return \Phalcon\Http\Response
+     */
+    public function bindWechatAction()
+    {
+        $validator = new CodeValidator();
+        if ($validator->validate(Request::get())->valid()) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $code = $validator->getValue('code');
+
+        $result = User::getInstance()->bindWechat($code);
+        if ($result) {
+            return Response::success();
+        }
+
+        return Response::fail(ErrorCode::$ENUM_OAUTH_BIND_FAIL);
+    }
+
 }
 

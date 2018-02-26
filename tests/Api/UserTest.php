@@ -60,9 +60,19 @@ class UserTest extends HttpTestCase
     public function testWechatLogin()
     {
         $result = $this->post('/user/login/wechat', [
-            'code' => '081Fd1n60fyKVJ1OH4m604Pkn60Fd1nU'
+            'code' => '001396QV1i5Y2W0iVVMV1Ev7QV1396QL'
         ]);
 
+        $this->assertEquals(1017, $result['errorCode']);
+    }
+
+    public function testBindWechat()
+    {
+        $result = $this->post('/user/bind/wechat', [
+            'code' => '001396QV1i5Y2W0iVVMV1Ev7QV1396QL'
+        ]);
+
+        dd($result);
         $this->assertEquals(1017, $result['errorCode']);
     }
 }

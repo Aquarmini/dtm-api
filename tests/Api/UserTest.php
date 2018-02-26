@@ -72,7 +72,6 @@ class UserTest extends HttpTestCase
             'code' => '001396QV1i5Y2W0iVVMV1Ev7QV1396QL'
         ]);
 
-        dd($result);
         $this->assertEquals(1017, $result['errorCode']);
     }
 }

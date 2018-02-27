@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Common\Enums\ErrorCode;
+use App\Common\Enums\SystemCode;
+use App\Common\Exceptions\BizException;
 use Phalcon\Mvc\Model\Behavior\SoftDelete;
 
 class Group extends Model
@@ -72,6 +75,45 @@ class Group extends Model
         ]);
 
         parent::initialize();
+    }
+
+    /**
+     * @desc   已完成任务数
+     * @author limx
+     * @return mixed
+     * @throws BizException
+     */
+    public function getFinishTaskCount()
+    {
+        if (empty($this->id)) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_MODEL_ERROR);
+        }
+        return Task::count([
+            'conditions' => 'groupId = ?0 AND status = ?1',
+            'bind' => [
+                $this->id,
+                SystemCode::TASK_STATUS_FINISH
+            ]
+        ]);
+    }
+
+    /**
+     * @desc   全部任务数
+     * @author limx
+     * @return mixed
+     * @throws BizException
+     */
+    public function getTaskCount()
+    {
+        if (empty($this->id)) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_MODEL_ERROR);
+        }
+        return Task::count([
+            'conditions' => 'groupId = ?0',
+            'bind' => [
+                $this->id
+            ]
+        ]);
     }
 
     /**

@@ -91,4 +91,27 @@ class Task
         $task->status = $status;
         return $task->save();
     }
+
+    public function dailyCount($pageIndex, $pageSize)
+    {
+        $user = User::getInstance()->user;
+
+        $repository = GroupRepository::getInstance();
+        $groups = $repository->listByUserId($user->id, $pageIndex, $pageSize);
+
+        $items = [];
+        foreach ($groups as $v) {
+            $item = $v->toArray();
+            $item['finishTaskCount'] = $v->getFinishTaskCount();
+            $item['taskCount'] = $v->getTaskCount();
+            $items[] = $item;
+        }
+
+        $total = $repository->countByUserId($user->id);
+
+        return [
+            'items' => $items,
+            'total' => $total
+        ];
+    }
 }

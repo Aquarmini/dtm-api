@@ -84,4 +84,14 @@ class TaskTest extends HttpTestCase
             }
         }
     }
+
+    public function testTaskDailyCount()
+    {
+        $result = $this->post('/task/daily/count', [
+            'pageIndex' => 0,
+            'pageSize' => 10
+        ]);
+
+        dd($result);
+    }
 }

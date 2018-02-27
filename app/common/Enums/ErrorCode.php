@@ -23,6 +23,11 @@ class ErrorCode extends Enum
     public static $ENUM_PARAMS_ERROR = 401;
 
     /**
+     * @Message('内部模型相关错误')
+     */
+    public static $ENUM_PARAMS_MODEL_ERROR = 402;
+
+    /**
      * @Message('TOKEN已失效')
      */
     public static $ENUM_TOKEN_INVALIAD = 700;

@@ -79,5 +79,26 @@ class TaskController extends Controller
         }
         return Response::fail(ErrorCode::$ENUM_TASK_STATUS_CHANGED_FAIL);
     }
+
+    /**
+     * @desc   每日任务统计
+     * @author limx
+     * @Middleware('auth')
+     * @return \Phalcon\Http\Response
+     */
+    public function dailyCountAction()
+    {
+        $validator = new PaginationValidator();
+        if ($validator->validate(Request::get())->valid()) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $pageIndex = $validator->getValue('pageIndex');
+        $pageSize = $validator->getValue('pageSize');
+
+        $result = Task::getInstance()->dailyCount($pageIndex, $pageSize);
+
+        return Response::success($result);
+    }
 }
 

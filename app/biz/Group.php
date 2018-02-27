@@ -22,8 +22,16 @@ class Group
     {
         $user = User::getInstance()->user;
         $repository = GroupRepository::getInstance();
-        $items = $repository->listByUserId($user->id, $pageIndex, $pageSize);
+        $groups = $repository->listByUserId($user->id, $pageIndex, $pageSize);
         $count = $repository->countByUserId($user->id);
+
+        $items = [];
+        foreach ($groups as $v) {
+            $item = $v->toArray();
+            $item['finishTaskCount'] = $v->getFinishTaskCount();
+            $item['taskCount'] = $v->getTaskCount();
+            $items[] = $item;
+        }
 
         return [
             'items' => $items,

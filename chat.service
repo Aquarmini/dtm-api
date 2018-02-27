@@ -1,0 +1,18 @@
+[Unit]
+Description=DTM Chat Server
+After=network.target
+After=syslog.target
+
+[Service]
+Type=forking
+PIDFile=/www/limx/dtm-api/storage/pids/socket.pid
+Restart=always
+User=nginx
+Group=nginx
+
+ExecStart=/usr/local/bin/php /www/limx/dtm-api/run chat --daemonize
+ExecStop=/bin/kill $MAINPID
+ExecReload=/bin/kill -USR1 $MAINPID
+
+[Install]
+WantedBy=multi-user.target graphical.target

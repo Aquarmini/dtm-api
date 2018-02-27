@@ -2,6 +2,7 @@
 
 namespace App\Tasks;
 
+use App\Biz\Chat;
 use App\Core\Cli\Task\WebSocket;
 use swoole_http_request;
 use swoole_websocket_frame;
@@ -38,9 +39,14 @@ class ChatTask extends WebSocket
     {
         $fd = $frame->fd;
         $data = $frame->data;
-        dump($fd, $data);
-        // echo $fd . ':' . $data . PHP_EOL;
-        $server->push($fd, 'ss' . $data);
+
+        $obj = json_decode($data, true);
+        if (!empty($obj)) {
+            $id = $obj['id'];
+            $data = $obj['data'];
+
+            Chat::getInstance()->handle($id, $data, $server, $fd);
+        }
     }
 
     public function close(swoole_websocket_server $ser, $fd)

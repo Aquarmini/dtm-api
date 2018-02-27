@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.21)
 # Database: dtm
-# Generation Time: 2018-02-24 08:01:34 +0000
+# Generation Time: 2018-02-27 03:42:47 +0000
 # ************************************************************
 
 
@@ -53,7 +53,7 @@ CREATE TABLE `task` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `INDEX_GROUP_ID` (`group_id`)
+  KEY `INDEX_GROUP_ID_STATUS` (`group_id`,`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='任务详情';
 
 

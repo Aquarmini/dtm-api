@@ -92,6 +92,6 @@ class TaskTest extends HttpTestCase
             'pageSize' => 10
         ]);
 
-        dd($result);
+        $this->assertTrue($result['success']);
     }
 }

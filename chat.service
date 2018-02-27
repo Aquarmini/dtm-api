@@ -10,7 +10,7 @@ Restart=always
 User=nginx
 Group=nginx
 
-ExecStart=/usr/local/bin/php /www/limx/dtm-api/run chat --daemonize
+ExecStart=/usr/local/bin/php /www/limx/dtm-api/run chat@main --daemonize
 ExecStop=/bin/kill $MAINPID
 ExecReload=/bin/kill -USR1 $MAINPID
 

@@ -75,6 +75,9 @@ abstract class HttpTestCase extends UnitTestCase
 
     public function __call($name, $arguments)
     {
+        if (env('PHPUNIT_ENGINE') === 'php') {
+            $arguments[0] = '?_url=' . $arguments[0];
+        }
         $res = $this->client->$name(...$arguments);
         return json_decode($res->getBody()->getContents(), true);
     }

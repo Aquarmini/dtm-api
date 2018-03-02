@@ -104,5 +104,4 @@ class UserOauth extends Model
     {
         return 'user_oauth';
     }
-
 }

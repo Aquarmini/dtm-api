@@ -101,4 +101,3 @@ class TaskController extends Controller
         return Response::success($result);
     }
 }
-

@@ -124,6 +124,4 @@ class GroupController extends Controller
         }
         return Response::fail(ErrorCode::$ENUM_TASK_GROUP_DELETE_FAIL);
     }
-
 }
-

@@ -24,5 +24,4 @@ class CodeValidator extends Validator
             ])
         );
     }
-
 }

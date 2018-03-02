@@ -25,5 +25,4 @@ class GroupSaveValidator extends Validator
             ])
         );
     }
-
 }

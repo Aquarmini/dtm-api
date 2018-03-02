@@ -14,7 +14,6 @@ use App\Utils\Response;
 
 class UserController extends Controller
 {
-
     public function loginAction()
     {
         $validator = new UserLoginValidator();
@@ -98,6 +97,4 @@ class UserController extends Controller
 
         return Response::fail(ErrorCode::$ENUM_OAUTH_BIND_FAIL);
     }
-
 }
-

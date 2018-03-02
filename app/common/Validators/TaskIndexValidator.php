@@ -26,5 +26,4 @@ class TaskIndexValidator extends Validator
             ])
         );
     }
-
 }

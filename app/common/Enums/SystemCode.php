@@ -17,5 +17,4 @@ class SystemCode
     const TASK_STATUS_WORKING = 1; // 进行中
     const TASK_STATUS_DELAY = 2; // 延期
     const TASK_STATUS_FINISH = 10; // 已完成
-
 }

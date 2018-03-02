@@ -25,5 +25,4 @@ class PaginationValidator extends Validator
             ])
         );
     }
-
 }

@@ -26,5 +26,4 @@ class UserRegisterValidator extends Validator
             ])
         );
     }
-
 }

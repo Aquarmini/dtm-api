@@ -138,5 +138,4 @@ class Task extends Model
     {
         return 'task';
     }
-
 }

@@ -165,5 +165,4 @@ class Group extends Model
     {
         return 'group';
     }
-
 }

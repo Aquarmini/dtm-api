@@ -41,6 +41,18 @@ abstract class HttpTestCase extends UnitTestCase
         $this->client = new Client([
             'base_uri' => env('PHPUNIT_URL')
         ]);
+
+        $token = $this->getUserToken();
+        if (empty($token)) {
+            $data = [
+                'login' => 'limx',
+                'password' => md5('910123'),
+            ];
+
+            $result = $this->post('/user/login', $data);
+            $token = $result['data']['token'];
+            $this->setUserToken($token);
+        }
     }
 
     protected function tearDown()

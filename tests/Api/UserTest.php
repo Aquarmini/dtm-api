@@ -57,21 +57,21 @@ class UserTest extends HttpTestCase
         $this->assertEquals('limx', $result['data']['login']);
     }
 
-    public function testWechatLogin()
-    {
-        $result = $this->post('/user/login/wechat', [
-            'code' => '001396QV1i5Y2W0iVVMV1Ev7QV1396QL'
-        ]);
-
-        $this->assertEquals(1017, $result['errorCode']);
-    }
-
-    public function testBindWechat()
-    {
-        $result = $this->post('/user/bind/wechat', [
-            'code' => '001396QV1i5Y2W0iVVMV1Ev7QV1396QL'
-        ]);
-
-        $this->assertEquals(1017, $result['errorCode']);
-    }
+    // public function testWechatLogin()
+    // {
+    //     $result = $this->post('/user/login/wechat', [
+    //         'code' => '001396QV1i5Y2W0iVVMV1Ev7QV1396QL'
+    //     ]);
+    //
+    //     $this->assertEquals(1017, $result['errorCode']);
+    // }
+    //
+    // public function testBindWechat()
+    // {
+    //     $result = $this->post('/user/bind/wechat', [
+    //         'code' => '001396QV1i5Y2W0iVVMV1Ev7QV1396QL'
+    //     ]);
+    //
+    //     $this->assertEquals(1017, $result['errorCode']);
+    // }
 }

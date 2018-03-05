@@ -77,6 +77,9 @@ class User
             return false;
         }
 
+        // 刷新登录超时时间
+        Redis::expire($token, 3600 * 24);
+
         $this->user = UserRepository::getInstance()->getById($user['id']);
         return true;
     }

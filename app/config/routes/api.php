@@ -28,5 +28,7 @@ $router->add('/task/add', 'App\\Controllers\\Api\\Task::add');
 $router->add('/task/index', 'App\\Controllers\\Api\\Task::index');
 // 修改任务状态
 $router->add('/task/status', 'App\\Controllers\\Api\\Task::status');
-// 每日任务统计
-$router->add('/task/daily/count', 'App\\Controllers\\Api\Task::dailyCount');
+// 每日任务统计 [暂不使用]
+$router->add('/task/daily/count', 'App\\Controllers\\Api\\Task::dailyCount');
+// 删除任务
+$router->add('/task/delete', 'App\\Controllers\\Api\\Task::delete');

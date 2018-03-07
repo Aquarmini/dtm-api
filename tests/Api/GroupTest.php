@@ -54,19 +54,19 @@ class GroupTest extends HttpTestCase
         $this->assertEquals($name, $group->name);
     }
 
-    // public function testGroupDelete()
-    // {
-    //     $result = $this->post('/group/add', [
-    //         'name' => '测试组',
-    //     ]);
-    //     $this->assertTrue($result['success']);
-    //
-    //     $id = $result['data']['id'];
-    //
-    //     $result = $this->post('/group/delete', [
-    //         'groupId' => $id
-    //     ]);
-    //
-    //     $this->assertTrue($result['success']);
-    // }
+    public function testGroupDelete()
+    {
+        $result = $this->post('/group/add', [
+            'name' => '测试组',
+        ]);
+        $this->assertTrue($result['success']);
+
+        $id = $result['data']['id'];
+
+        $result = $this->post('/group/delete', [
+            'groupId' => $id
+        ]);
+
+        $this->assertTrue($result['success']);
+    }
 }

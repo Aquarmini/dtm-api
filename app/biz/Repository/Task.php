@@ -21,7 +21,7 @@ class Task
      * @param $taskId
      * @return TaskModel|\Phalcon\Mvc\Model\ResultInterface
      */
-    public function getById($taskId)
+    public function findById($taskId)
     {
         return TaskModel::findFirst($taskId);
     }

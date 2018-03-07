@@ -126,4 +126,9 @@ class ErrorCode extends Enum
      * @Message('微信授权信息绑定出错！')
      */
     public static $ENUM_OAUTH_BIND_FAIL = 1018;
+
+    /**
+     * @Message('任务删除失败！')
+     */
+    public static $ENUM_TASK_DELETE_FAIL = 1019;
 }

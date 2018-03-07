@@ -19,7 +19,7 @@ use Tests\UnitTestCase;
  */
 class TaskTest extends HttpTestCase
 {
-    public function testTaskAdd()
+    public function testTaskAddAndDelete()
     {
         $result = $this->post('/group/index', [
             'pageIndex' => 0,
@@ -35,6 +35,14 @@ class TaskTest extends HttpTestCase
                 $result = $this->post('/task/add', [
                     'groupId' => $id,
                     'detail' => '测试任务' . uniqid()
+                ]);
+
+                $this->assertTrue($result['success']);
+
+                $id = $result['data']['info']['id'];
+
+                $result = $this->post('/task/delete', [
+                    'taskId' => $id
                 ]);
 
                 $this->assertTrue($result['success']);

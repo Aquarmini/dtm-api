@@ -7,6 +7,7 @@ use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Common\Validators\PaginationValidator;
 use App\Common\Validators\TaskAddValidator;
+use App\Common\Validators\TaskIdValidator;
 use App\Common\Validators\TaskIndexValidator;
 use App\Common\Validators\TaskStatusValidator;
 use App\Controllers\Controller;
@@ -99,5 +100,27 @@ class TaskController extends Controller
         $result = Task::getInstance()->dailyCount($pageIndex, $pageSize);
 
         return Response::success($result);
+    }
+
+    /**
+     * @desc   任务删除
+     * @author limx
+     * @Middleware('auth')
+     * @return \Phalcon\Http\Response
+     */
+    public function deleteAction()
+    {
+        $validator = new TaskIdValidator();
+        if ($validator->validate(Request::get())->valid()) {
+            throw new BizException(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $taskId = $validator->getValue('taskId');
+
+        $result = Task::getInstance()->delete($taskId);
+        if ($result) {
+            return Response::success();
+        }
+        return Response::fail(ErrorCode::$ENUM_TASK_DELETE_FAIL);
     }
 }

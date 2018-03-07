@@ -64,7 +64,7 @@ class Task
 
     public function status($taskId, $status)
     {
-        $task = TaskRepository::getInstance()->getById($taskId);
+        $task = TaskRepository::getInstance()->findById($taskId);
         if (empty($task)) {
             throw new BizException(ErrorCode::$ENUM_TASK_NOT_EXIST);
         }
@@ -113,5 +113,20 @@ class Task
             'items' => $items,
             'total' => $total
         ];
+    }
+
+    public function delete($taskId)
+    {
+        $user = User::getInstance()->user;
+
+        $task = TaskRepository::getInstance()->findById($taskId);
+        if (empty($task->group)) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_EXSIT);
+        }
+        if (empty($task->group->user) || $task->group->user->id !== $user->id) {
+            throw new BizException(ErrorCode::$ENUM_GROUP_NOT_HAVE_AUTHORITY);
+        }
+
+        return $task->delete();
     }
 }

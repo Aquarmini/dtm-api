@@ -24,7 +24,8 @@ class UserOauth
     public function findByOpenId($openId)
     {
         return UserOauthModel::findFirst([
-            'openid' => $openId,
+            'conditions' => 'openId = ?0',
+            'bind' => [$openId],
         ]);
     }
 

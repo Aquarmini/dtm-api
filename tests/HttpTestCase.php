@@ -50,6 +50,9 @@ abstract class HttpTestCase extends UnitTestCase
             ];
 
             $result = $this->post('/user/login', $data);
+            if (!isset($result['data']['token'])) {
+                throw new \Exception('Get User Token Failed! ' . json_encode($result));
+            }
             $token = $result['data']['token'];
             $this->setUserToken($token);
         }

@@ -1,14 +1,22 @@
 <?php
 // +----------------------------------------------------------------------
-// | CommandInterface.php [ WE CAN DO IT JUST THINK IT ]
+// | BasicService.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace App\Utils\Redis\Commands;
+namespace App\Biz\Service;
 
-interface CommandInterface
+use Xin\Swoole\Rpc\Handler\Handler;
+use Xin\Traits\Common\InstanceTrait;
+
+class BasicService extends Handler
 {
-    public static function getScript();
+    use InstanceTrait;
+
+    public function version()
+    {
+        return di('config')->version;
+    }
 }

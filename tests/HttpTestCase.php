@@ -39,7 +39,7 @@ abstract class HttpTestCase extends UnitTestCase
     {
         parent::setUp();
         $this->client = new Client([
-            'base_uri' => env('PHPUNIT_URL')
+            'base_uri' => di('config')->phpunit->url
         ]);
 
         $token = $this->getUserToken();
@@ -87,7 +87,7 @@ abstract class HttpTestCase extends UnitTestCase
 
     public function __call($name, $arguments)
     {
-        if (env('PHPUNIT_ENGINE') === 'php') {
+        if (di('config')->phpunit->engine === 'php') {
             $arguments[0] = '?_url=' . $arguments[0];
         }
         $res = $this->client->$name(...$arguments);

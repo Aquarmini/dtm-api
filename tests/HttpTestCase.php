@@ -76,7 +76,7 @@ abstract class HttpTestCase extends UnitTestCase
 
     public function post($url, $data = [])
     {
-        if (env('PHPUNIT_ENGINE') === 'php') {
+        if (di('config')->phpunit->engine === 'php') {
             $url = '?_url=' . $url;
         }
         $res = $this->client->post($url, [

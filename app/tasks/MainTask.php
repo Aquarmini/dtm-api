@@ -20,7 +20,6 @@ class MainTask extends Task
 
     public function mainAction()
     {
-        dd(di('config')->wechat->mini->toArray());
         foreach (static::$tasks as $task) {
             $this->console->handle($task);
         }

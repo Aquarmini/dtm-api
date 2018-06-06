@@ -28,7 +28,7 @@ class User
     {
         return UserModel::findFirst([
             'conditions' => 'login = ?0',
-            'bind' => $login
+            'bind' => [$login]
         ]);
     }
 

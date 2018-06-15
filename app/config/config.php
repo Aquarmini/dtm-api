@@ -24,7 +24,7 @@ $config = new Config(
         | This value is version for this project.
         |
         */
-        'version' => '2.4.0',
+        'version' => '2.4.3',
 
         /*
         |--------------------------------------------------------------------------
@@ -105,6 +105,7 @@ $config = new Config(
                 'dispatcher' => App\Core\Services\Mvc\Dispatcher::class,
                 'middleware' => App\Core\Services\Mvc\Middleware::class,
                 'request' => App\Core\Services\Mvc\Request::class,
+                'response' => App\Core\Services\Mvc\Response::class,
             ],
         ],
     ]

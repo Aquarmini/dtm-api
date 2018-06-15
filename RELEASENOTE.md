@@ -12,6 +12,26 @@
 
 ### Deleted
 
+## [2.4.3]
+
+增加Swoole驱动引擎，暂不支持SESSION模块。
+
+### Checked
+- [x] php单元测试
+
+### Added
+* 增加swoole http引擎配置
+* 增加getJsonRawBody
+* 完善Cookies初始化
+
+### Changed
+* 修改MVC注入依赖时，兼容Swoole引擎
+* 修改master server pid默认值为0
+* 重写异常捕获Handler
+
+### Fixed
+* 修改mongo密码为纯数字时报错的BUG
+
 ## [2.4.0]
 ### Checked
 - [x] php单元测试

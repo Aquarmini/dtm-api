@@ -73,6 +73,11 @@ switch ($action) {
         $http->on('workerStart', function () {
             /** @var FactoryDefault $di */
             require ROOT_PATH . '/bootstrap/bootstrap.php';
+            swoole_timer_tick(60 * 1000, function () {
+                /** @var \Phalcon\Db\Adapter\Pdo\Mysql $db */
+                $db = di('db');
+                $db->getInternalHandler()->getAttribute(PDO::ATTR_SERVER_INFO);
+            });
         });
         $http->on('request', function ($request, $response) {
             $di = FactoryDefault::getDefault();
